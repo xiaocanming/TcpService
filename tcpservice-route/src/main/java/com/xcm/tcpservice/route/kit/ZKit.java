@@ -7,6 +7,7 @@ import org.I0Itec.zkclient.ZkClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @创建人 xcm
  * @创建时间 2021/3/2
  */
+@Component
 public class ZKit {
     private static Logger logger = LoggerFactory.getLogger(ZKit.class);
 

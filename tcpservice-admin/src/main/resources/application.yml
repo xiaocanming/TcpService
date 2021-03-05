@@ -1,0 +1,13 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: tcpservice-admin
+  profiles:
+    active: dev #默认为开发环境
+
+
+
+
+

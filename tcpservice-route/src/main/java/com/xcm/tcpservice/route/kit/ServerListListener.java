@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @描述
+ * @描述 路由服务启动
  * @创建人 xcm
  * @创建时间 2021/3/2
  */
