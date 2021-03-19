@@ -3,7 +3,7 @@ package com.xcm.tcpservice.common.exception;
 import com.xcm.tcpservice.common.enums.StatusEnum;
 
 /**
- * @描述
+ * @描述 自定义异常
  * @创建人 xcm
  * @创建时间 2021/3/4
  */
@@ -56,7 +56,6 @@ public class TcpException extends GenericException {
         super(message, oriEx);
         this.errorMessage = message;
     }
-
 
     //如果一端的Socket被关闭（或主动关闭，或因为异常退出而 引起的关闭），另一端仍发送数据，发送的第一个数据包引发该异常(Connect reset by peer)
     public static boolean isResetByPeer(String msg) {

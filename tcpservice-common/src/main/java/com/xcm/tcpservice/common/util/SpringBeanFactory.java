@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * @描述
+ * @描述 工厂实例化bean
  * @创建人 xcm
  * @创建时间 2021/3/2
  */

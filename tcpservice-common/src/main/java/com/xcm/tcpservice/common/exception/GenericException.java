@@ -3,11 +3,9 @@ package com.xcm.tcpservice.common.exception;
 import java.io.Serializable;
 
 /**
- * Function:
- *
- * @author crossoverJie
- *         Date: 2018/8/25 15:27
- * @since JDK 1.8
+ * @描述 自定义异常
+ * @创建人 xcm
+ * @创建时间 2021/3/10
  */
 public class GenericException extends RuntimeException implements Serializable {
     private static final long serialVersionUID = 1L;

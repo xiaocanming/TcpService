@@ -8,14 +8,11 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Function: 路由策略， 随机
- *
- * @Auther: jiangyunxiong
- * @Date: 2019/3/7 11:56
- * @since JDK 1.8
+ * @描述 路由策略，随机
+ * @创建人 xcm
+ * @创建时间 2021/3/3
  */
 public class RandomHandle implements RouteHandle {
-
     @Override
     public String routeServer(List<String> values, String key) {
         int size = values.size();

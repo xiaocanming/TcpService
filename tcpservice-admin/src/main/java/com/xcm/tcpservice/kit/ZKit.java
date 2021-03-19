@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @描述
+ * @描述 zookeeper 客户端
  * @创建人 xcm
  * @创建时间 2021/3/3
  */

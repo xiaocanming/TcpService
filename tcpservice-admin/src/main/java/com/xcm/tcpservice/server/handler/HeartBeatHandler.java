@@ -1,9 +1,9 @@
-package com.xcm.tcpservice.common.kit;
+package com.xcm.tcpservice.server.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 
 /**
- * @描述
+ * @描述 心跳Handler
  * @创建人 xcm
  * @创建时间 2021/3/3
  */

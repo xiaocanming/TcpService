@@ -1,4 +1,4 @@
-package com.xcm.tcpservice.util;
+package com.xcm.tcpservice.server.handler;
 
 import com.xcm.tcpservice.common.pojo.TcpClientInfo;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -7,25 +7,17 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @描述
+ * @描述 sockt通道缓存
  * @创建人 xcm
  * @创建时间 2021/3/3
  */
 public class SessionSocketHolder {
 
     private static final Map<Long, NioSocketChannel> CHANNEL_MAP = new ConcurrentHashMap<>(16);
-    private static final Map<Long, String> SESSION_MAP = new ConcurrentHashMap<>(16);
 
-    public static void saveSession(Long userId,String userName){
-        SESSION_MAP.put(userId, userName);
-    }
-
-    public static void removeSession(Long userId){
-        SESSION_MAP.remove(userId) ;
-    }
 
     /**
-     * Save the relationship between the userId and the channel.
+     * Save the relationship between the clientId and the channel.
      * @param id
      * @param socketChannel
      */
@@ -50,20 +42,15 @@ public class SessionSocketHolder {
      * @param nioSocketChannel
      * @return
      */
-    public static TcpClientInfo getUserId(NioSocketChannel nioSocketChannel){
+    public static long getClientId(NioSocketChannel nioSocketChannel){
         for (Map.Entry<Long, NioSocketChannel> entry : CHANNEL_MAP.entrySet()) {
             NioSocketChannel value = entry.getValue();
             if (nioSocketChannel == value){
                 Long key = entry.getKey();
-                String userName = SESSION_MAP.get(key);
-                TcpClientInfo info = new TcpClientInfo() ;
-                info.setClientId(key);
-                info.setClientName(userName);
-                return info ;
+                return key ;
             }
         }
-
-        return null;
+        return 0L;
     }
 
 }

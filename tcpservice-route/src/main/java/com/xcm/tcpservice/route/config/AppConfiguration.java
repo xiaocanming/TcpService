@@ -1,12 +1,17 @@
 package com.xcm.tcpservice.route.config;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 
 /**
- * @描述
+ * @描述 配置类
  * @创建人 xcm
  * @创建时间 2021/3/2
  */
+@Component
+@Data
 public class AppConfiguration {
     @Value("${app.zk.root}")
     private String zkRoot;
@@ -14,60 +19,13 @@ public class AppConfiguration {
     @Value("${app.zk.addr}")
     private String zkAddr;
 
+    @Value("${app.zk.timeout}")
+    private int zkConnectTimeout;
 
     @Value("${server.port}")
     private int port;
 
-    @Value("${app.zk.connect.timeout}")
-    private int zkConnectTimeout;
-
     @Value("${app.route.way}")
     private String routeWay;
 
-    @Value("${app.route.way.consitenthash}")
-    private String consistentHashWay;
-
-    public int getZkConnectTimeout() {
-        return zkConnectTimeout;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public String getZkRoot() {
-        return zkRoot;
-    }
-
-    public void setZkRoot(String zkRoot) {
-        this.zkRoot = zkRoot;
-    }
-
-    public String getZkAddr() {
-        return zkAddr;
-    }
-
-    public void setZkAddr(String zkAddr) {
-        this.zkAddr = zkAddr;
-    }
-
-    public String getRouteWay() {
-        return routeWay;
-    }
-
-    public void setRouteWay(String routeWay) {
-        this.routeWay = routeWay;
-    }
-
-    public String getConsistentHashWay() {
-        return consistentHashWay;
-    }
-
-    public void setConsistentHashWay(String consistentHashWay) {
-        this.consistentHashWay = consistentHashWay;
-    }
 }

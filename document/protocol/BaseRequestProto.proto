@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package protocol;
+
+option java_package = "com.crossoverjie.cim.common.protocol";
+option java_outer_classname = "CIMRequestProto";
+
+message CIMReqProtocol {
+  required string reqMsg = 1;
+  required int64 requestId = 2;
+  required int32 type = 3;
+}
+

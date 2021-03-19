@@ -16,3 +16,6 @@ app:
     addr: 47.99.113.23:2181
     timeout: 15000
     root: /route
+
+route:
+  url: http://localhost:8083/

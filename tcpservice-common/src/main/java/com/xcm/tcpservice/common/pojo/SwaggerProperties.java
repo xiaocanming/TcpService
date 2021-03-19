@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @描述
+ * @描述 Swagger文档属性
  * @创建人 xcm
  * @创建时间 2021/3/4
  */

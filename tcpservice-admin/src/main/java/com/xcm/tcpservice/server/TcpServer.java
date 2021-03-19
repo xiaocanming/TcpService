@@ -3,7 +3,7 @@ package com.xcm.tcpservice.server;
 import com.xcm.tcpservice.common.constant.DefaultConstants;
 import com.xcm.tcpservice.common.pojo.SendMsgReqVO;
 import com.xcm.tcpservice.common.protocol.CIMRequestProto;
-import com.xcm.tcpservice.util.SessionSocketHolder;
+import com.xcm.tcpservice.server.handler.SessionSocketHolder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -22,7 +22,7 @@ import javax.annotation.PreDestroy;
 import java.net.InetSocketAddress;
 
 /**
- * @描述
+ * @描述 tcp服务启动类
  * @创建人 xcm
  * @创建时间 2021/3/3
  */
@@ -33,10 +33,8 @@ public class TcpServer {
     private EventLoopGroup boss = new NioEventLoopGroup();
     private EventLoopGroup work = new NioEventLoopGroup();
 
-
     @Value("${tcp.server.port}")
     private int nettyPort;
-
 
     /**
      * 启动 cim server
@@ -46,7 +44,6 @@ public class TcpServer {
      */
     @PostConstruct
     public void start() throws InterruptedException {
-
         ServerBootstrap bootstrap = new ServerBootstrap()
                 .group(boss, work)
                 .channel(NioServerSocketChannel.class)
@@ -74,19 +71,19 @@ public class TcpServer {
 
 
     /**
-     * Push msg to client.
+     * 发送消息到客户端
      * @param sendMsgReqVO 消息
      */
     public void sendMsg(SendMsgReqVO sendMsgReqVO){
-        NioSocketChannel socketChannel = SessionSocketHolder.get(sendMsgReqVO.getUserId());
+        NioSocketChannel socketChannel = SessionSocketHolder.get(sendMsgReqVO.getReceiveClientId());
 
         if (null == socketChannel) {
-            LOGGER.error("client {} offline!", sendMsgReqVO.getUserId());
+            LOGGER.error("client {} offline!", sendMsgReqVO.getReceiveClientId());
             return;
         }
         CIMRequestProto.CIMReqProtocol protocol = CIMRequestProto.CIMReqProtocol.newBuilder()
-                .setRequestId(sendMsgReqVO.getUserId())
-                .setReqMsg(sendMsgReqVO.getMsg())
+                .setRequestId(sendMsgReqVO.getReceiveClientId())
+                .setReqMsg(sendMsgReqVO.getMsg().toString())
                 .setType(DefaultConstants.CommandType.MSG)
                 .build();
 

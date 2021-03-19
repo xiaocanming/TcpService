@@ -12,7 +12,7 @@ app:
     #路由策略，轮询
     #way: com.xcm.tcpservice.common.algorithm.loop.LoopHandle
     #路由策略，随机
-    way: com.xcm.tcpservice.common.algorithm.loop.RandomHandle
+    way: com.xcm.tcpservice.common.algorithm.random.RandomHandle
 
 
 
