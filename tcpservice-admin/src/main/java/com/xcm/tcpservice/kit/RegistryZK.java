@@ -1,7 +1,7 @@
 package com.xcm.tcpservice.kit;
 
-import com.xcm.tcpservice.common.util.SpringBeanFactory;
 import com.xcm.tcpservice.config.AppConfiguration;
+import com.xcm.tcpservice.util.SpringBeanFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +32,12 @@ public class RegistryZK implements Runnable {
 
     @Override
     public void run() {
-
+//        try {
+//            InetAddress ip4 = Inet4Address.getLocalHost();
+//            System.out.println(ip4.getHostAddress());
+//        } catch (UnknownHostException e) {
+//            e.printStackTrace();
+//        }
         //创建父节点
         zKit.createRootNode();
 

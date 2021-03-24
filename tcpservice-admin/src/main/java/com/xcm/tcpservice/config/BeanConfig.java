@@ -1,5 +1,7 @@
 package com.xcm.tcpservice.config;
 
+import com.xcm.tcpservice.common.constant.DefaultConstants;
+import com.xcm.tcpservice.common.protocol.CIMRequestProto;
 import okhttp3.OkHttpClient;
 import org.I0Itec.zkclient.ZkClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +37,19 @@ public class BeanConfig {
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true);
         return builder.build();
+    }
+
+    /**
+     * 创建心跳单例
+     * @return
+     */
+    @Bean(value = "heartBeat")
+    public CIMRequestProto.CIMReqProtocol heartBeat() {
+        CIMRequestProto.CIMReqProtocol heart = CIMRequestProto.CIMReqProtocol.newBuilder()
+                .setRequestId(0L)
+                .setReqMsg("pong")
+                .setType(DefaultConstants.CommandType.PING)
+                .build();
+        return heart;
     }
 }

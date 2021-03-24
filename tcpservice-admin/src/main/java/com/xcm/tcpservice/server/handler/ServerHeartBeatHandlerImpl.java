@@ -8,12 +8,14 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @描述 心跳进程实现类
  * @创建人 xcm
  * @创建时间 2021/3/3
  */
+@Service
 public class ServerHeartBeatHandlerImpl implements HeartBeatHandler {
     private final static Logger LOGGER = LoggerFactory.getLogger(ServerHeartBeatHandlerImpl.class);
 

@@ -2,18 +2,21 @@ package com.xcm.tcpservice.server.handler;
 
 import com.xcm.tcpservice.common.constant.DefaultConstants;
 import com.xcm.tcpservice.common.exception.TcpException;
-import com.xcm.tcpservice.common.pojo.TcpClientInfo;
 import com.xcm.tcpservice.common.protocol.CIMRequestProto;
+import com.xcm.tcpservice.common.service.RedisService;
 import com.xcm.tcpservice.common.util.NettyAttrUtil;
-import com.xcm.tcpservice.common.util.SpringBeanFactory;
+import com.xcm.tcpservice.config.AppConfiguration;
+import com.xcm.tcpservice.util.SpringBeanFactory;
 import io.netty.channel.*;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.timeout.IdleState;
-import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.PostConstruct;
+
+import static com.xcm.tcpservice.common.constant.DefaultConstants.LOGIN_STATUS_PREFIX;
 
 /**
  * @描述 tcp服务Handler
@@ -24,8 +27,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TcpServerHandler extends ChannelInboundHandlerAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(TcpServerHandler.class);
 
-    @Autowired
-    private  RouteHandler routeHandler;
+    private  RedisService redisService ;
+
+    private   RouteHandler routeHandler;
+
+    public  TcpServerHandler(RedisService redisService ,RouteHandler routeHandler){
+        this.routeHandler=routeHandler;
+        this.redisService=redisService;
+    }
+
     /**
      * 取消绑定
      * @param ctx
@@ -47,6 +57,12 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+
+        //连接发送心跳消息
+        CIMRequestProto.CIMReqProtocol heartBeat = SpringBeanFactory.getBean("heartBeat",
+                CIMRequestProto.CIMReqProtocol.class);
+        ChannelFuture future = ctx.writeAndFlush(heartBeat);
+
         long clientId = SessionSocketHolder.getClientId((NioSocketChannel) ctx.channel());
         if(clientId!=0L){
             LOGGER.info("[{}] connection!",clientId);
@@ -58,16 +74,16 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
     //心跳过期检查
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if (evt instanceof IdleStateEvent) {
-            IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
-            if (idleStateEvent.state() == IdleState.READER_IDLE) {
-
-                LOGGER.info("定时检测客户端端是否存活");
-
-                HeartBeatHandler heartBeatHandler = SpringBeanFactory.getBean(ServerHeartBeatHandlerImpl.class) ;
-                heartBeatHandler.process(ctx) ;
-            }
-        }
+//        if (evt instanceof IdleStateEvent) {
+//            IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
+//            if (idleStateEvent.state() == IdleState.READER_IDLE) {
+//
+//                LOGGER.info("定时检测客户端端是否存活");
+//
+//                HeartBeatHandler heartBeatHandler = SpringBeanFactory.getBean(ServerHeartBeatHandlerImpl.class) ;
+//                heartBeatHandler.process(ctx) ;
+//            }
+//        }
         super.userEventTriggered(ctx, evt);
     }
 
@@ -82,6 +98,9 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
                 msgcim.getReqMsg();
                 //心跳更新时间
                 if (msgcim.getType() == DefaultConstants.CommandType.PING){
+                    //添加缓存
+                    redisService.sAdd(LOGIN_STATUS_PREFIX,msgcim.toString());
+
                     NettyAttrUtil.updateReaderTime(ctx.channel(),System.currentTimeMillis());
                     //向客户端响应 pong 消息
                     CIMRequestProto.CIMReqProtocol heartBeat = SpringBeanFactory.getBean("heartBeat",

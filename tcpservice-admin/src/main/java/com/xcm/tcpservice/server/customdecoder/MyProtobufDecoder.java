@@ -29,37 +29,37 @@ public class MyProtobufDecoder extends ByteToMessageDecoder {
                     byte tmp2 = in.readByte();
                     if(tmp2==(byte) 0xEB){
                         int index=in.readerIndex();
-//                        if(in.getByte(index+25)==(byte) 0x09){
-//
-//                            // 字节转成对象
-//                            ByteBuf frame = Unpooled.buffer(25);
-//                            in.readBytes(frame);
-//                            byte[] inByte = frame.array();
-//                            CIMRequestProto.CIMReqProtocol msg=CIMRequestProto.CIMReqProtocol.parseFrom(inByte);
-//                            if (msg != null) {
-//                                // 获取业务消息头
-//                                out.add(msg);
-//                            }
-//                            byte tmp3 = in.readByte();
-//                            return;
-//                        }
-
-                        if(in.getByte(index+24)==(byte) 0x09){
+                        if(in.getByte(index+10)==(byte) 0x09){
 
                             // 字节转成对象
-                            ByteBuf frame = Unpooled.buffer(24);
+                            ByteBuf frame = Unpooled.buffer(10);
                             in.readBytes(frame);
                             byte[] inByte = frame.array();
-//                            CIMRequestProto.CIMReqProtocol msg=CIMRequestProto.CIMReqProtocol.parseFrom(inByte);
-//                            if (msg != null) {
-//                                // 获取业务消息头
-//                                out.add(msg);
-//                            }
-                            String msg=new String(inByte,"utf-8");
-                            out.add(msg);
+                            CIMRequestProto.CIMReqProtocol msg=CIMRequestProto.CIMReqProtocol.parseFrom(inByte);
+                            if (msg != null) {
+                                // 获取业务消息头
+                                out.add(msg);
+                            }
                             byte tmp3 = in.readByte();
                             return;
                         }
+
+//                        if(in.getByte(index+24)==(byte) 0x09){
+//
+//                            // 字节转成对象
+//                            ByteBuf frame = Unpooled.buffer(24);
+//                            in.readBytes(frame);
+//                            byte[] inByte = frame.array();
+////                            CIMRequestProto.CIMReqProtocol msg=CIMRequestProto.CIMReqProtocol.parseFrom(inByte);
+////                            if (msg != null) {
+////                                // 获取业务消息头
+////                                out.add(msg);
+////                            }
+//                            String msg=new String(inByte,"utf-8");
+//                            out.add(msg);
+//                            byte tmp3 = in.readByte();
+//                            return;
+//                        }
                     }
                 }
             }

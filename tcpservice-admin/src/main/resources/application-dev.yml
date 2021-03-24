@@ -19,3 +19,18 @@ app:
 
 route:
   url: http://localhost:8083/
+
+
+spring:
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 192.168.190.129:26379,192.168.190.129:26380,192.168.190.129:26381
+    lettuce:
+      pool:
+        max-idle: 10
+        max-active: 20
+        min-idle: 5
+        max-wait: 10000ms
+
+

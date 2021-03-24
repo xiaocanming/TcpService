@@ -1,4 +1,4 @@
-package com.xcm.tcpservice.common.util;
+package com.xcm.tcpservice.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -6,12 +6,13 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * @描述 工厂实例化bean
+ * @描述
  * @创建人 xcm
- * @创建时间 2021/3/2
+ * @创建时间 2021/3/23
  */
 @Component
 public final class SpringBeanFactory implements ApplicationContextAware {
+
     private static ApplicationContext context;
 
     public static <T> T getBean(Class<T> c){
@@ -27,6 +28,4 @@ public final class SpringBeanFactory implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         context = applicationContext;
     }
-
 }
-

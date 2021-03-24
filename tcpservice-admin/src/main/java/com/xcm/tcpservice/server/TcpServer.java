@@ -14,6 +14,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +37,9 @@ public class TcpServer {
     @Value("${tcp.server.port}")
     private int nettyPort;
 
+    @Autowired
+    private TcpServerInitializer tcpServerInitializer;
+
     /**
      * 启动 cim server
      *
@@ -50,7 +54,7 @@ public class TcpServer {
                 .localAddress(new InetSocketAddress(nettyPort))
                 //保持长连接
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
-                .childHandler(new TcpServerInitializer());
+                .childHandler(tcpServerInitializer);
 
         ChannelFuture future = bootstrap.bind().sync();
         if (future.isSuccess()) {

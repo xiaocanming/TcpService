@@ -1,9 +1,13 @@
 package com.xcm.tcpservice.route.kit;
 
-import com.xcm.tcpservice.common.util.SpringBeanFactory;
 import com.xcm.tcpservice.route.config.AppConfiguration;
+import com.xcm.tcpservice.route.util.SpringBeanFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @描述 路由服务启动
@@ -30,3 +34,4 @@ public class ServerListListener implements Runnable{
         zkUtil.subscribeEvent(appConfiguration.getZkRoot());
     }
 }
+
