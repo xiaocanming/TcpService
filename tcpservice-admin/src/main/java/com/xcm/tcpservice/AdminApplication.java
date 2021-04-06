@@ -18,9 +18,9 @@ import java.net.InetAddress;
  * @创建时间 2021/3/3
  */
 @SpringBootApplication
-public class ServerApplication implements CommandLineRunner {
+public class AdminApplication implements CommandLineRunner {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(ServerApplication.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(AdminApplication.class);
 
     @Autowired
     private AppConfiguration appConfiguration ;
@@ -29,7 +29,7 @@ public class ServerApplication implements CommandLineRunner {
     private int httpPort ;
 
     public static void main(String[] args) {
-        SpringApplication.run(ServerApplication.class, args);
+        SpringApplication.run(AdminApplication.class, args);
         LOGGER.info("Start cim server success!!!");
     }
 

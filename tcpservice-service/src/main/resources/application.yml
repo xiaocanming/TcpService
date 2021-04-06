@@ -1,0 +1,20 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: tcpservice-route
+  profiles:
+    active: dev #默认为开发环境
+
+app:
+  route:
+    #路由策略，轮询
+    #way: com.xcm.tcpservice.common.algorithm.loop.LoopHandle
+    #路由策略，随机
+    way: com.xcm.tcpservice.common.algorithm.random.RandomHandle
+
+
+
+
+
