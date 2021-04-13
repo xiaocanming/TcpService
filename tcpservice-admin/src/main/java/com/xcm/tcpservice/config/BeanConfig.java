@@ -1,5 +1,8 @@
 package com.xcm.tcpservice.config;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.xcm.tcpservice.common.constant.DefaultConstants;
 import com.xcm.tcpservice.common.protocol.CIMRequestProto;
 import okhttp3.OkHttpClient;
