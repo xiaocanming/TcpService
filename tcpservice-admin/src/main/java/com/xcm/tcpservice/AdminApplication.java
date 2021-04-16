@@ -1,5 +1,7 @@
 package com.xcm.tcpservice;
 
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
+import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import com.xcm.tcpservice.config.AppConfiguration;
 import com.xcm.tcpservice.kit.RegistryZK;
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import java.net.InetAddress;
  * @创建时间 2021/3/3
  */
 @SpringBootApplication
+@EnableDubboConfiguration
 public class AdminApplication implements CommandLineRunner {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(AdminApplication.class);

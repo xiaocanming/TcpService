@@ -6,5 +6,5 @@ package com.xcm.tcpservice.common.service;
  * @创建时间 2021/3/25
  */
 public interface JobService {
-    String saveData() throws InterruptedException;
+    String saveData();
 }

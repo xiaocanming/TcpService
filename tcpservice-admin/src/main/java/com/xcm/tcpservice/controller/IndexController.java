@@ -1,10 +1,12 @@
 package com.xcm.tcpservice.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.xcm.tcpservice.common.api.AdminApi;
 import com.xcm.tcpservice.common.enums.StatusEnum;
 import com.xcm.tcpservice.common.pojo.BaseResponse;
 import com.xcm.tcpservice.common.pojo.NULLBody;
 import com.xcm.tcpservice.common.pojo.SendMsgReqVO;
+import com.xcm.tcpservice.common.service.JobService;
 import com.xcm.tcpservice.server.TcpServer;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
@@ -43,6 +45,25 @@ public class IndexController implements AdminApi {
         tcpServer.sendMsg(sendMsgReqVO) ;
         res.setCode(StatusEnum.SUCCESS.getCode());
         res.setMessage(StatusEnum.SUCCESS.getMessage());
+        return res;
+    }
+
+
+    @Reference  //注入要调用的服务
+    private JobService jobService;
+
+    /**
+     * 推送消息到客户端
+     * @return
+     */
+    @ApiOperation("Push msg to client")
+    @RequestMapping(value = "test",method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse<String> test(){
+        BaseResponse<String> res = new BaseResponse();
+        res.setCode(StatusEnum.SUCCESS.getCode());
+        res.setMessage(StatusEnum.SUCCESS.getMessage());
+        res.setDataBody(jobService.saveData());
         return res;
     }
 

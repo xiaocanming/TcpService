@@ -42,11 +42,8 @@
         <protobuf.version>3.4.0</protobuf.version>
         <swagger2.version>2.9.2</swagger2.version>
 
-        <dubbo-springboot-starter.version>2.7.1</dubbo-springboot-starter.version>
-        <dubbo.version>2.7.2</dubbo.version>
-        <curator-recipes.version>4.0.1</curator-recipes.version>
-        <curator-framework.version>4.0.1</curator-framework.version>
-
+        <dubbo-springboot-starter.version>2.0.0</dubbo-springboot-starter.version>
+        <!--<dubbo-dependencies-zookeeper.version>2.7.6</dubbo-dependencies-zookeeper.version>-->
 
     </properties>
 
@@ -137,26 +134,24 @@
 
 
             <!--dubbo-->
+
             <dependency>
-                <groupId>org.apache.dubbo</groupId>
+                <groupId>com.alibaba.spring.boot</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo-springboot-starter.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-recipes</artifactId>
-                <version>${curator-recipes.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-framework</artifactId>
-                <version>${curator-framework.version}</version>
-            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>org.apache.dubbo</groupId>-->
+                <!--<artifactId>dubbo-spring-boot-starter</artifactId>-->
+                <!--<version>${dubbo-springboot-starter.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.apache.dubbo</groupId>-->
+                <!--<artifactId>dubbo-dependencies-zookeeper</artifactId>-->
+                <!--<version>${dubbo-dependencies-zookeeper.version}</version>-->
+                <!--<type>pom</type>-->
+            <!--</dependency>-->
             <!--dubbo-->
 
 

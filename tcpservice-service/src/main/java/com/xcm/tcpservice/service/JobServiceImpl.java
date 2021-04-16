@@ -1,7 +1,8 @@
 package com.xcm.tcpservice.service;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.xcm.tcpservice.common.service.JobService;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * @描述
@@ -9,10 +10,11 @@ import org.apache.dubbo.config.annotation.Service;
  * @创建时间 2021/3/25
  */
 @Service(loadbalance = "random",timeout = 50000,cluster = "failsafe")
+@Component
 public class JobServiceImpl implements JobService {
 
     @Override
-    public String saveData() throws InterruptedException {
+    public String saveData() {
 
         return "Hello Dubbo";
     }
