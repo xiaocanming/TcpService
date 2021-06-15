@@ -10,3 +10,4 @@ message CIMReqProtocol {
   required int64 requestId = 2;
   required int32 type = 3;
 }
+

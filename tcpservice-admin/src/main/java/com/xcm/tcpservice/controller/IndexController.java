@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.rmi.runtime.Log;
 
 import java.io.Serializable;
 
@@ -48,7 +49,6 @@ public class IndexController implements AdminApi {
         return res;
     }
 
-
     @Reference  //注入要调用的服务
     private JobService jobService;
 
@@ -63,7 +63,8 @@ public class IndexController implements AdminApi {
         BaseResponse<String> res = new BaseResponse();
         res.setCode(StatusEnum.SUCCESS.getCode());
         res.setMessage(StatusEnum.SUCCESS.getMessage());
-        res.setDataBody(jobService.saveData());
+//        res.setDataBody(jobService.saveData());
+        System.out.println("test接口测试");
         return res;
     }
 

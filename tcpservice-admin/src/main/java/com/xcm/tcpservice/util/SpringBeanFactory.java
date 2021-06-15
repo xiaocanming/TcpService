@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * @描述
+ * @描述  这个需要写在项目中，不能放到common中，否则会报错，具体什么原因暂时不知道
  * @创建人 xcm
  * @创建时间 2021/3/23
  */

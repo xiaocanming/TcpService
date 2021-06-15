@@ -11,5 +11,5 @@ dubbo:
   registry:
     timeout: 15000
   scan:
-    base-packages: com.xcm.tcpservice.service.service
+    base-packages: com.xcm.tcpservice.schedule.service
 

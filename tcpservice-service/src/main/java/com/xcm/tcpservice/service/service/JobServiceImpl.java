@@ -1,8 +1,11 @@
-package com.xcm.tcpservice.service;
+package com.xcm.tcpservice.service.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.xcm.tcpservice.common.pojo.BaseResponse;
 import com.xcm.tcpservice.common.service.JobService;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @描述
@@ -14,8 +17,7 @@ import org.springframework.stereotype.Component;
 public class JobServiceImpl implements JobService {
 
     @Override
-    public String saveData() {
-
-        return "Hello Dubbo";
+    public BaseResponse<String> saveData(List<String> keys) {
+        return null;
     }
 }

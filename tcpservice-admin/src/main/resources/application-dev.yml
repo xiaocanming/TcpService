@@ -20,7 +20,6 @@ app:
 route:
   url: http://localhost:8083/
 
-
 spring:
   redis:
     password: 123456
@@ -37,4 +36,6 @@ spring:
     application:
       name: dubbo-consumer
       registry: zookeeper://47.99.113.23:2181
+    consumer:
+      check: false
 
